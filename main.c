@@ -39,26 +39,28 @@ read_to_string(char* p_path, char* p_str)
 }
 
 void
-err(char* p_str, int* p_ecode)
+err(char* p_str)
 {
 	fprintf(stderr, "%s\n", p_str);
-	if (p_ecode != NULL) exit(*p_ecode);
 }
 
 int
 main(int argc, char* argv[])
 {
-	if (argc < 2)
-		err("Error: Argument count invalid. (Expected at least 2)", (int*)1);
+	if (argc < 2) {
+		err("Error: Argument count invalid. (Expected at least 2)");
+		return EXIT_FAILURE;
+	}
 
-	if (strlen(argv[1]) > (PATH_MAX + 1))
-		err("Error: Path limit exceeded.", (int*)1);
+	if (strlen(argv[1]) > (PATH_MAX + 1)) {
+		err("Error: Path limit exceeded.");
+		return EXIT_FAILURE;
+	}
 
 	char f_contents[4096] = {};
 
 	read_to_string(argv[1], f_contents);
 
-	printf("%s", f_contents);
 
 	return EXIT_SUCCESS;
 }
