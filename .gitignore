@@ -1,3 +1,6 @@
 *.o
 tags
 program
+.venv
+*.pyc
+__pycache__/

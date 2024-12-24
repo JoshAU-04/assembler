@@ -51,10 +51,11 @@ int main(int argc, char *argv[]) {
   read_to_string(argv[1], f_contents);
   f_size = (int)strlen((const char *)f_contents);
 
+  char buf[32] = {};
+  int idx = 0;
+
   for (int i = 0; i < f_size; i++) {
     char c = f_contents[i];
-    char buf[32] = {};
-    int idx = 0;
 
     if (c == '\0') {
       idx = 0;
@@ -63,6 +64,7 @@ int main(int argc, char *argv[]) {
     }
 
     buf[idx] = c;
+    idx += 1;
 
     if (strcmp(buf, (const char *)"return") == 0) {
       fprintf(stdout, "Found return value.\n");
